@@ -1,0 +1,3 @@
+    PID    PPID S CMD
+  12655   12616 S ./zombie-maker
+  12656   12655 Z [zombie-maker] <defunct>
