@@ -25,7 +25,7 @@ me where to start when you bring it to studio.
 **What it means:** The manual says to release the box that took its hold last. That is Kiln Row because it has held its lever for the shortest time and has the least work to lose by standing back.
 
 ## Milestone 2
-**What I did:** I ran the Ring Line model in gdb and inspected the threads and backtraces. I found that Northgate waits for Waterside, Waterside waits for Old Quarter, Old Quarter waits for Kiln Row, and Kiln Row waits for Northgate. All four were waiting in take_lever at line 127.
+**What I did:** I used GDB to inspect the four threads and their levers. Northgate held the Northgate lever and waited for Waterside's lever, which Waterside held. Waterside held the Waterside lever and waited for Old Quarter's lever, which Old Quarter held. Old Quarter held the Old Quarter lever and waited for Kiln Row's lever, which Kiln Row held. Kiln Row held the Kiln Row lever and waited for Northgate's lever, which Northgate held. The GDB backtraces showed each thread waiting in take_lever at line 127.
 
 **Output or seal:**
 ```6806DDAC
@@ -33,7 +33,7 @@ me where to start when you bring it to studio.
 **What it means:** The four boxes form a circular wait. Each box is waiting for the next box's lever, so none of them can continue and the Ring Line is deadlocked.
 
 ## Milestone 3
-**What I did:** I used GDB to inspect the four waiting threads and identify the four conditions causing the deadlock. I then released Kiln Row's lever so the other districts could continue. 
+**What I did:** I used GDB to confirm all four deadlock conditions. Mutual exclusion was shown because each lever had one owner. Hold and wait was shown because each district held one lever while waiting for another. No preemption was shown because a district could not take a lever from another district. Circular wait was shown because Northgate waited for Waterside, Waterside for Old Quarter, Old Quarter for Kiln Row, and Kiln Row for Northgate. I then released Kiln Row's lever and the Ring Line continued.
 
 **Output or seal:**
 ```05FC00D6
