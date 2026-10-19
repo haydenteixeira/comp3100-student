@@ -23,6 +23,7 @@ and never did.
 | 5 | The two measured rows matched, but the two computed rows in Table IX did not match the fair copy. | Compared `output-ledger.txt`, `~/.ledger-annex`, and `working-papers-tableIX.txt`. | I think the problem is with how the computed values were produced or recorded, because the measured values stayed the same and my arithmetic matched the fair copy. |
 | 6 | All five philosophers could each hold one fork while waiting forever for the second fork. | `starter/philosophers.c` and the stalled program output | I think this shows a deadlock: each philosopher was waiting for a resource held by another philosopher. |
 | 7 | The four signal boxes were deadlocked because each one held a lever while waiting for another. | `gdb` showed the four threads waiting in a cycle. | I think this means a cycle of threads waiting for each other's resources can cause a deadlock. |
+| 9 | Valgrind found 196,825 bytes definitely lost in 52 blocks. | `valgrind --leak-check=full ./store-siphon` | I think the program keeps allocating memory without freeing it, but the cap stops it from growing forever. |
 
 Add more rows as the weeks go on. Keep entries short — a sentence or
 two per column is plenty, and a note that turns out to be nothing
