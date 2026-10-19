@@ -51,6 +51,7 @@ The size command showed text = 2342 bytes, data = 636 bytes, and bss = 4128 byte
 4. Memory leak at line 27: 102 bytes lost in 6 blocks (24 directly and 78 indirectly).
 
 The three main faults were an invalid write, an invalid read after free, and a memory leak. I fixed all three problems and ran Valgrind again. The final test showed 9 allocations, 9 frees, and 0 errors.
+To fix the invalid write, I changed the memory allocation to use strlen(name) + 1 so there was enough space for the null terminator. To fix the invalid read, I saved the block count before freeing the memory. To fix the memory leak, I added a loop to free the remaining linked list. After making these changes, Valgrind reported 9 allocations, 9 frees, 0 errors, and no memory leaks.
 
 **Output or seal:**
 ```191CF1BD
@@ -59,6 +60,7 @@ The three main faults were an invalid write, an invalid read after free, and a m
 
 ## Milestone 3
 **What I did:** I compiled store-siphon.c and ran it using Valgrind. It showed 52 leaked blocks totaling 196,825 bytes. I checked the source code and found that 48 blocks were allocated by draw_block() and 4 by fair_copy(). The allocation cap was 48.
+Valgrind showed 53 allocations and 1 free, with 197,849 bytes allocated in total. The 48 blocks from `draw_block()` used 196,608 bytes, and the 4 blocks from `fair_copy()` used 217 bytes. Together, these were 196,825 bytes definitely lost in 52 blocks. The remaining 1,024 bytes were freed, so they were not included in the memory leak total.
 
 **Output or seal:**
 ```Seal: 8AB38942
@@ -70,6 +72,20 @@ Loss record 2: 196,608 bytes in 48 blocks (line 53)
 
 ## Milestone 4
 **What I did:** I used Valgrind and GDB together to inspect the program's memory. I set a breakpoint at siphon_rests(), checked the leaked blocks, and read four hidden messages stored in memory.
+GDB commands used:
+target remote | /usr/bin/vgdb --pid=1717
+break siphon_rests
+continue
+monitor leak_check full reachable any
+monitor block_list 1
+
+Memory blocks inspected:
+1. 0x4AA5C40 — "To the Board of the Enginehouse, and to its guests at the Exhibition --"
+2. 0x4AA5CD0 — "...they called our work superseded..."
+3. 0x4AA5D40 — "...they called our work obsolete..."
+4. 0x4AA5DB0 — "A tool is obsolete. We were never the tool; we were the check upon it."
+
+I used the GDB command x/s followed by each address to read the text stored in memory. Valgrind showed that these four blocks contained 217 bytes of leaked memory.
 
 **Output or seal:**
 ```Seal: 92DAAB8C
