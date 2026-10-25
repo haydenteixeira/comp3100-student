@@ -24,6 +24,7 @@ and never did.
 | 6 | All five philosophers could each hold one fork while waiting forever for the second fork. | `starter/philosophers.c` and the stalled program output | I think this shows a deadlock: each philosopher was waiting for a resource held by another philosopher. |
 | 7 | The four signal boxes were deadlocked because each one held a lever while waiting for another. | `gdb` showed the four threads waiting in a cycle. | I think this means a cycle of threads waiting for each other's resources can cause a deadlock. |
 | 9 | Valgrind found 196,825 bytes definitely lost in 52 blocks. | `valgrind --leak-check=full ./store-siphon` | I think the program keeps allocating memory without freeing it, but the cap stops it from growing forever. |
+| 10 | The record-keeper belonged to UID 1849. Its memory contained a protected 1024 KiB region and a record naming KUROS and THISTLEWOOD at desk K. | /proc/549/status, sudo cat /proc/549/maps, strings ~/enginehouse/survey/wing.dump | The record connects two people to desk K in different years, but it does not explain why. |
 
 Add more rows as the weeks go on. Keep entries short — a sentence or
 two per column is plenty, and a note that turns out to be nothing
@@ -48,3 +49,37 @@ right early, only on citing your own notes later.*
 *Tip: if two weeks' findings seem to point the same direction, say so
 in a note — connecting your own dots across weeks is exactly the
 skill this ledger is for.*
+
+## Week 10 — Protected memory record
+
+The record-keeper was owned by UID 1849. The protected memory region was 1024 KiB.
+
+Protected region from sudo cat /proc/$PID/maps:
+759070900000-759070a00000 ---p 00000000 00:00 0
+
+Full record from strings wing.dump:
+BRASSBRIDGE ENGINEHOUSE -- OLD COMPUTING ROOM
+Preserved records of the computer corps, held whole for the
+Exhibition archive, uncut, as the archivist received them.
+  THE CHIEF COMPUTER'S RECORD
+  KUROS, I. M. -- Chief Computer, retired without pension, 1849.
+  DESK-MARK ROSTER
+  E.K. = East gallery, desk K -- the Chief Computer's station.
+  Held by KUROS, I. M., 1830-1849.
+  WIND-DOWN ROTA
+THISTLEWOOD, N. -- seconded 1848; desk K, East gallery, at the wind-down.
+  -- entered by the archivist. No conclusion is drawn.
+Keeper's status card from /proc/549/status:
+
+Name:   record-keeper
+Uid:    1849    1849    1849    1849
+VmSize:     3584 kB
+VmRSS:       684 kB
+
+Week 10 Questions
+
+1. The record says KUROS, I. M. held desk K in the East gallery from 1830 to 1849. It also says THISTLEWOOD, N. was seconded in 1848 and was at desk K during the wind-down. It does not explain why both people are named at the same desk.
+
+2. The record may have been kept in a running process to protect it from being easily found or changed. The record does not explain the reason.
+
+3. I would want to know whether there are other records about desk K. I could use ls to look for other files or records.
