@@ -24,7 +24,7 @@ and never did.
 | 6 | All five philosophers could each hold one fork while waiting forever for the second fork. | `starter/philosophers.c` and the stalled program output | I think this shows a deadlock: each philosopher was waiting for a resource held by another philosopher. |
 | 7 | The four signal boxes were deadlocked because each one held a lever while waiting for another. | `gdb` showed the four threads waiting in a cycle. | I think this means a cycle of threads waiting for each other's resources can cause a deadlock. |
 | 9 | Valgrind found 196,825 bytes definitely lost in 52 blocks. | `valgrind --leak-check=full ./store-siphon` | I think the program keeps allocating memory without freeing it, but the cap stops it from growing forever. |
-| 10 | The record-keeper belonged to UID 1849. Its memory contained a protected 1024 KiB region and a record naming KUROS and THISTLEWOOD at desk K. | /proc/549/status, sudo cat /proc/549/maps, strings ~/enginehouse/survey/wing.dump | The record connects two people to desk K in different years, but it does not explain why. |
+| 10 | The record-keeper belonged to UID 1849. Its memory contained a protected 1024 KiB region and a record naming KUREOS and THISTLEWOOD at desk K. | /proc/549/status, sudo cat /proc/549/maps, strings ~/enginehouse/survey/wing.dump | The record connects two people to desk K in different years, but it does not explain why. |
 
 Add more rows as the weeks go on. Keep entries short — a sentence or
 two per column is plenty, and a note that turns out to be nothing
@@ -78,7 +78,7 @@ VmRSS:       684 kB
 
 Week 10 Questions
 
-1. The record says KUROS, I. M. held desk K in the East gallery from 1830 to 1849. It also says THISTLEWOOD, N. was seconded in 1848 and was at desk K during the wind-down. It does not explain why both people are named at the same desk.
+1. The record says KUREOS, I. M. held desk K in the East gallery from 1830 to 1849. It also says THISTLEWOOD, N. was seconded in 1848 and was at desk K during the wind-down. It does not explain why both people are named at the same desk.
 
 2. The record may have been kept in a running process to protect it from being easily found or changed. The record does not explain the reason.
 
