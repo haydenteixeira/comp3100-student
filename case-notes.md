@@ -25,6 +25,7 @@ and never did.
 | 7 | The four signal boxes were deadlocked because each one held a lever while waiting for another. | `gdb` showed the four threads waiting in a cycle. | I think this means a cycle of threads waiting for each other's resources can cause a deadlock. |
 | 9 | Valgrind found 196,825 bytes definitely lost in 52 blocks. | `valgrind --leak-check=full ./store-siphon` | I think the program keeps allocating memory without freeing it, but the cap stops it from growing forever. |
 | 10 | The record-keeper belonged to UID 1849. Its memory contained a protected 1024 KiB region and a record naming KUREOS and THISTLEWOOD at desk K. | /proc/549/status, sudo cat /proc/549/maps, strings ~/enginehouse/survey/wing.dump | The record connects two people to desk K in different years, but it does not explain why. |
+| 11 | I found 7 deleted inodes and recovered 3 memoranda. | Used debugfs on cabinet-1848.img to inspect and recover deleted files. | Deleting a file does not always erase its data, and some deleted files can still be recovered. |
 
 Add more rows as the weeks go on. Keep entries short — a sentence or
 two per column is plenty, and a note that turns out to be nothing
