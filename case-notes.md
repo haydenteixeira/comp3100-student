@@ -26,6 +26,7 @@ and never did.
 | 9 | Valgrind found 196,825 bytes definitely lost in 52 blocks. | `valgrind --leak-check=full ./store-siphon` | I think the program keeps allocating memory without freeing it, but the cap stops it from growing forever. |
 | 10 | The record-keeper belonged to UID 1849. Its memory contained a protected 1024 KiB region and a record naming KUREOS and THISTLEWOOD at desk K. | /proc/549/status, sudo cat /proc/549/maps, strings ~/enginehouse/survey/wing.dump | The record connects two people to desk K in different years, but it does not explain why. |
 | 11 | I found 7 deleted inodes and recovered 3 memoranda. | Used debugfs on cabinet-1848.img to inspect and recover deleted files. | Deleting a file does not always erase its data, and some deleted files can still be recovered. |
+| 12 | I found 12 capsules in the drop box, including one with no named sender. | grep '^CAPSULE ' "$DROP" and grep -A 8 '^CAPSULE 04 ' "$DROP" | The copier was saving messages, and Capsule 04 stood out because it had no named sender. |
 
 Add more rows as the weeks go on. Keep entries short — a sentence or
 two per column is plenty, and a note that turns out to be nothing
@@ -84,3 +85,14 @@ Week 10 Questions
 2. The record may have been kept in a running process to protect it from being easily found or changed. The record does not explain the reason.
 
 3. I would want to know whether there are other records about desk K. I could use ls to look for other files or records.
+
+
+## Week 12 - Task 4 - Capsule 04
+
+Date: Fri 30 Oct 1851
+
+Address:
+To the Boards of the five sister cities, for the Exhibition's opening morning --
+
+Closing line:
+your diligent servant,
