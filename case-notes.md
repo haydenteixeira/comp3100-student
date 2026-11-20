@@ -28,6 +28,7 @@ and never did.
 | 11 | I found 7 deleted inodes and recovered 3 memoranda. | Used debugfs on cabinet-1848.img to inspect and recover deleted files. | Deleting a file does not always erase its data, and some deleted files can still be recovered. |
 | 12 | I found 12 capsules in the drop box, including one with no named sender. | grep '^CAPSULE ' "$DROP" and grep -A 8 '^CAPSULE 04 ' "$DROP" | The copier was saving messages, and Capsule 04 stood out because it had no named sender. |
 | 13 | I found that a setuid bit on a script did not give it extra permissions, even though setuid programs like passwd can run with a different effective UID. | Used `ls -l`, `id`, `find`, and the registry logs to investigate permissions and compare key records with visitor times. | I learned that the kernel treats setuid scripts differently from setuid programs for security reasons. I also learned that a key appearing in a log does not prove who used it. |
+| 14 | I found five dispatches waiting to be sent on Mon 7 Dec 1851. | I checked the outbound queue and used the Exchange listener on port 1851. | I learned that queued dispatches can be moved to the held folder to stop them from being sent without deleting them. |
 
 Add more rows as the weeks go on. Keep entries short — a sentence or
 two per column is plenty, and a note that turns out to be nothing
